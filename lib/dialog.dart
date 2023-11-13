@@ -22,8 +22,9 @@ class ShowDialog {
               ListTile(
                 title: const Text('Price'),
                 onTap: () {
-                  temp.sort((a, b) => (b['quote']['USD']['price'] as Comparable)
-                      .compareTo(a['quote']['USD']['price']));
+                  filteredTemp.sort((a, b) =>
+                      (b['quote']['USD']['price'] as Comparable)
+                          .compareTo(a['quote']['USD']['price']));
                   option.complete('Price');
 
                   Navigator.of(context).pop();
@@ -33,7 +34,7 @@ class ShowDialog {
                 title: const Text('Volume (24 Hours)'),
                 onTap: () {
                   option.complete('Volume');
-                  temp.sort((a, b) =>
+                  filteredTemp.sort((a, b) =>
                       (b['quote']['USD']['volume_24h'] as Comparable)
                           .compareTo(a['quote']['USD']['volume_24h']));
 
@@ -44,7 +45,7 @@ class ShowDialog {
                 title: const Text('Price Change (24 Hours)'),
                 onTap: () {
                   option.complete('Price Change');
-                  temp.sort((a, b) =>
+                  filteredTemp.sort((a, b) =>
                       (b['quote']['USD']['percent_change_24h'] as Comparable)
                           .compareTo(a['quote']['USD']['percent_change_24h']));
 
@@ -55,7 +56,7 @@ class ShowDialog {
                 title: const Text('Market Cap'),
                 onTap: () {
                   option.complete('MCap');
-                  temp.sort((a, b) =>
+                  filteredTemp.sort((a, b) =>
                       (a['cmc_rank'] as Comparable).compareTo(b['cmc_rank']));
 
                   Navigator.of(context).pop();

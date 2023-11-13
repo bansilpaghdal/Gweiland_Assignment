@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 void main() => runApp(MyApp());
-List temp = [];
+List filteredTemp = [];
 
 class MyApp extends StatelessWidget {
   @override
@@ -33,8 +33,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Map logo = {}; // map of coins id and its logo's url
   String? sort_condition = 'MCap';
   TextEditingController searchController = TextEditingController();
-  List filteredTemp = [];
 
+  List temp = [];
   Future<void> fetchData() async {
     var url = Uri.parse(
         'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=e7a5cc23-8050-459b-8180-9f00696ffabb');
@@ -101,12 +101,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void updateSearchResults(String query) {
     if (query.isEmpty) {
-      // If the search query is empty, show the whole temp list
       setState(() {
         filteredTemp = List.from(temp);
       });
     } else {
-      // Otherwise, filter the temp list
       List results = [];
       for (var item in temp) {
         if (item['name'].toLowerCase().contains(query.toLowerCase()) ||
