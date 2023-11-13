@@ -1,16 +1,7 @@
 # gweiland
 
-A new Flutter project.
+An assignment to fetch cryptocurrency data from CoinMarket API and display it.
+**Additional Features :** Implemented the filter button to sort the coins based on price, volum_24h, price_change_24. Implemented the search to search the coins based on their name or symbol.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ <p align="center"><img src="/gweilandassignment.gif" width="300" height="550"/></p>
