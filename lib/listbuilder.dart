@@ -3,10 +3,10 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
 class Listbuilder extends StatefulWidget {
-  var temp;
+  List temp;
   Map? logo;
   String? sort_condition;
-  Listbuilder({this.temp, this.sort_condition, this.logo});
+  Listbuilder({required this.temp, this.sort_condition, this.logo});
 
   @override
   State<Listbuilder> createState() => _ListbuilderState();
@@ -17,7 +17,7 @@ class _ListbuilderState extends State<Listbuilder> {
   Widget build(BuildContext context) {
     return ListView.builder(
       physics: BouncingScrollPhysics(),
-      itemCount: 20,
+      itemCount: widget.temp.length,
       itemBuilder: (context, index) {
         if (index == 0) {
           return Container(

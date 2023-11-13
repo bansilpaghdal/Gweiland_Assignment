@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:gweiland/listbuilder.dart';
 import 'package:gweiland/navigationbar.dart';
 
@@ -31,6 +32,8 @@ class _MyHomePageState extends State<MyHomePage> {
   List idlist = []; // list of top 20 coins id
   Map logo = {}; // map of coins id and its logo's url
   String? sort_condition = 'MCap';
+  TextEditingController searchController = TextEditingController();
+  List filteredTemp = [];
 
   Future<void> fetchData() async {
     var url = Uri.parse(
@@ -57,7 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
         temp[i]['quote']['USD']['percent_change_24h'] =
             double.parse(percent.toStringAsFixed(2));
       }
-
+      debugPrint(temp.toString());
+      filteredTemp = List.from(temp);
       await fetchlogo();
       setState(() {});
     } else {
@@ -92,6 +96,27 @@ class _MyHomePageState extends State<MyHomePage> {
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
+    }
+  }
+
+  void updateSearchResults(String query) {
+    if (query.isEmpty) {
+      // If the search query is empty, show the whole temp list
+      setState(() {
+        filteredTemp = List.from(temp);
+      });
+    } else {
+      // Otherwise, filter the temp list
+      List results = [];
+      for (var item in temp) {
+        if (item['name'].toLowerCase().contains(query.toLowerCase()) ||
+            item['symbol'].toLowerCase().contains(query.toLowerCase())) {
+          results.add(item);
+        }
+      }
+      setState(() {
+        filteredTemp = results;
+      });
     }
   }
 
@@ -155,6 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: TextField(
                               onChanged: (value) {
                                 print('Search query: $value');
+                                updateSearchResults(value);
                               },
                               decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.all(0),
@@ -241,7 +267,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Expanded(
                     child: Listbuilder(
-                      temp: temp,
+                      temp: filteredTemp,
                       sort_condition: sort_condition,
                       logo: logo,
                     ),
